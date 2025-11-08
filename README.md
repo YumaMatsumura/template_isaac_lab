@@ -1,135 +1,82 @@
 # Template for Isaac Lab Projects
 
-## Overview
+## 概要
 
-This project/repository serves as a template for building projects or extensions based on Isaac Lab.
-It allows you to develop in an isolated environment, outside of the core Isaac Lab repository.
+本パッケージは、強化学習を行うためのテンプレートとして用意している。
+作成手順も記述しているため、こちらのテンプレートを使用しなくても再現することが可能となる。
 
-**Key Features:**
-
-- `Isolation` Work outside the core Isaac Lab repository, ensuring that your development efforts remain self-contained.
-- `Flexibility` This template is set up to allow your code to be run as an extension in Omniverse.
-
-**Keywords:** extension, template, isaaclab
-
-## Installation
-
-- Install Isaac Lab by following the [installation guide](https://isaac-sim.github.io/IsaacLab/main/source/setup/installation/index.html).
-  We recommend using the conda or uv installation as it simplifies calling Python scripts from the terminal.
-
-- Clone or copy this project/repository separately from the Isaac Lab installation (i.e. outside the `IsaacLab` directory):
-
-- Using a python interpreter that has Isaac Lab installed, install the library in editable mode using:
-
-    ```bash
-    # use 'PATH_TO_isaaclab.sh|bat -p' instead of 'python' if Isaac Lab is not installed in Python venv or conda
-    python -m pip install -e source/template_isaac_lab
-
-- Verify that the extension is correctly installed by:
-
-    - Listing the available tasks:
-
-        Note: It the task name changes, it may be necessary to update the search pattern `"Template-"`
-        (in the `scripts/list_envs.py` file) so that it can be listed.
-
-        ```bash
-        # use 'FULL_PATH_TO_isaaclab.sh|bat -p' instead of 'python' if Isaac Lab is not installed in Python venv or conda
-        python scripts/list_envs.py
-        ```
-
-    - Running a task:
-
-        ```bash
-        # use 'FULL_PATH_TO_isaaclab.sh|bat -p' instead of 'python' if Isaac Lab is not installed in Python venv or conda
-        python scripts/<RL_LIBRARY>/train.py --task=<TASK_NAME>
-        ```
-
-    - Running a task with dummy agents:
-
-        These include dummy agents that output zero or random agents. They are useful to ensure that the environments are configured correctly.
-
-        - Zero-action agent
-
-            ```bash
-            # use 'FULL_PATH_TO_isaaclab.sh|bat -p' instead of 'python' if Isaac Lab is not installed in Python venv or conda
-            python scripts/zero_agent.py --task=<TASK_NAME>
-            ```
-        - Random-action agent
-
-            ```bash
-            # use 'FULL_PATH_TO_isaaclab.sh|bat -p' instead of 'python' if Isaac Lab is not installed in Python venv or conda
-            python scripts/random_agent.py --task=<TASK_NAME>
-            ```
-
-### Set up IDE (Optional)
-
-To setup the IDE, please follow these instructions:
-
-- Run VSCode Tasks, by pressing `Ctrl+Shift+P`, selecting `Tasks: Run Task` and running the `setup_python_env` in the drop down menu.
-  When running this task, you will be prompted to add the absolute path to your Isaac Sim installation.
-
-If everything executes correctly, it should create a file .python.env in the `.vscode` directory.
-The file contains the python paths to all the extensions provided by Isaac Sim and Omniverse.
-This helps in indexing all the python modules for intelligent suggestions while writing code.
-
-### Setup as Omniverse Extension (Optional)
-
-We provide an example UI extension that will load upon enabling your extension defined in `source/template_isaac_lab/template_isaac_lab/ui_extension_example.py`.
-
-To enable your extension, follow these steps:
-
-1. **Add the search path of this project/repository** to the extension manager:
-    - Navigate to the extension manager using `Window` -> `Extensions`.
-    - Click on the **Hamburger Icon**, then go to `Settings`.
-    - In the `Extension Search Paths`, enter the absolute path to the `source` directory of this project/repository.
-    - If not already present, in the `Extension Search Paths`, enter the path that leads to Isaac Lab's extension directory directory (`IsaacLab/source`)
-    - Click on the **Hamburger Icon**, then click `Refresh`.
-
-2. **Search and enable your extension**:
-    - Find your extension under the `Third Party` category.
-    - Toggle it to enable your extension.
-
-## Code formatting
-
-We have a pre-commit template to automatically format your code.
-To install pre-commit:
+## 作成手順
 
 ```bash
-pip install pre-commit
+(env_isaaclab) yuma@yuma-FRONTIER:~/IsaacLab$ ./isaaclab.sh --new
+[INFO] Installing template dependencies...
+
+[INFO] Running template generator...
+
+? Task type: External
+? Project path: /home/yuma/
+? Project name: template_isaac_lab
+
+      RL environment features support according to Isaac Lab workflows
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━┓
+┃ Environment feature                             ┃ Direct ┃ Manager-based ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━┩
+│ Single-agent                                    │  yes   │      yes      │
+│ Multi-agent                                     │  yes   │      no       │
+│ Fundamental/composite spaces (apart from 'Box') │  yes   │      no       │
+└─────────────────────────────────────────────────┴────────┴───────────────┘
+? Isaac Lab workflow: Manager-based | single-agent
+
+                                Supported RL libraries
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┓
+┃ RL/training feature          ┃ rl_games ┃ rsl_rl  ┃ skrl                  ┃ sb3     ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━┩
+│ ML frameworks                │ PyTorch  │ PyTorch │ PyTorch, JAX          │ PyTorch │
+│ Relative performance         │ ~1X      │ ~1X     │ ~1X                   │ ~0.03X  │
+│ Algorithms                   │ PPO      │ PPO     │ AMP, IPPO, MAPPO, PPO │ PPO     │
+│ Multi-agent support          │ no       │ no      │ yes                   │ no      │
+│ Distributed training         │ yes      │ no      │ yes                   │ no      │
+│ Vectorized training          │ yes      │ yes     │ yes                   │ no      │
+│ Fundamental/composite spaces │ no       │ no      │ yes                   │ no      │
+└──────────────────────────────┴──────────┴─────────┴───────────────────────┴─────────┘
+? RL library: rsl_rl
+
+Validating specification...
+Generating external project...
+  |-- Copying repo files...
+  |-- Copying scripts...
+  |-- Copying extension files...
+  |-- Generating tasks...
+  |    |-- Generating 'Template-Template-Isaac-Lab-v0' task...
+  |-- Copying vscode files...
+Setting up git repo in /home/yuma/template_isaac_lab path...
+  |  Initialized empty Git repository in /home/yuma/template_isaac_lab/.git/
+
+--------------------------------------------------------------------------------
+Project 'template_isaac_lab' generated successfully in /home/yuma/template_isaac_lab path.
+See /home/yuma/template_isaac_lab/README.md to get started!
+--------------------------------------------------------------------------------
 ```
 
-Then you can run pre-commit with:
+## 実行手順
 
-```bash
-pre-commit run --all-files
-```
+- 利用可能なタスクを一覧表示する
 
-## Troubleshooting
+  ```bash
+  python scripts/list_envs.py
+  ```
 
-### Pylance Missing Indexing of Extensions
+- タスクを実行する
 
-In some VsCode versions, the indexing of part of the extensions is missing.
-In this case, add the path to your extension in `.vscode/settings.json` under the key `"python.analysis.extraPaths"`.
+  ```bash
+  python scripts/rsl_rl/train.py --task=<TASK_NAME>
+  ```
 
-```json
-{
-    "python.analysis.extraPaths": [
-        "<path-to-ext-repo>/source/template_isaac_lab"
-    ]
-}
-```
+## 開発者用
 
-### Pylance Crash
+- `pre-commit`の導入
 
-If you encounter a crash in `pylance`, it is probable that too many files are indexed and you run out of memory.
-A possible solution is to exclude some of omniverse packages that are not used in your project.
-To do so, modify `.vscode/settings.json` and comment out packages under the key `"python.analysis.extraPaths"`
-Some examples of packages that can likely be excluded are:
-
-```json
-"<path-to-isaac-sim>/extscache/omni.anim.*"         // Animation packages
-"<path-to-isaac-sim>/extscache/omni.kit.*"          // Kit UI tools
-"<path-to-isaac-sim>/extscache/omni.graph.*"        // Graph UI tools
-"<path-to-isaac-sim>/extscache/omni.services.*"     // Services tools
-...
-```
+  ```bash
+  pip install pre-commit
+  pre-commit install
+  ```
