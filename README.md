@@ -73,6 +73,16 @@
    + source/template_isaac_lab/template_isaac_lab/tasks/locomotion
    ```
 
+4. ロボットモデルを追加する
+
+   ```bash
+   cd ~/template_isaac_lab/source/template_isaac_lab/template_isaac_lab
+   mkdir -p assets/robots
+   cd assets/robots/
+   touch <robot_name>.py
+   touch <robot_name>_actuators.py  # 必要であれば追加する
+   ```
+
 ## 環境構築手順
 
 ```bash
