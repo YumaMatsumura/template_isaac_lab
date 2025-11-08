@@ -66,6 +66,13 @@
    --------------------------------------------------------------------------------
    ```
 
+3. フォルダ名を変更する
+
+   ```bash
+   - source/template_isaac_lab/template_isaac_lab/tasks/manager_based
+   + source/template_isaac_lab/template_isaac_lab/tasks/locomotion
+   ```
+
 ## 環境構築手順
 
 ```bash
