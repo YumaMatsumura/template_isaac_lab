@@ -83,7 +83,7 @@ pip install -e source/template_isaac_lab/
 - タスクを実行する
 
   ```bash
-  python scripts/rsl_rl/train.py --task=<TASK_NAME>
+  python scripts/rsl_rl/train.py --task <TASK_NAME>
   ```
 
 ## 開発者用
