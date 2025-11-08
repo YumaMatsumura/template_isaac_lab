@@ -7,56 +7,64 @@
 
 ## 作成手順
 
-```bash
-(env_isaaclab) yuma@yuma-FRONTIER:~/IsaacLab$ ./isaaclab.sh --new
-[INFO] Installing template dependencies...
+1. プロジェクトを作成する
 
-[INFO] Running template generator...
+   ```bash
+   cd ~/IsaacLab
+   ./isaaclab.sh --new
+   ```
 
-? Task type: External
-? Project path: /home/yuma/
-? Project name: template_isaac_lab
+2. 以下のように設定する
 
-      RL environment features support according to Isaac Lab workflows
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━┓
-┃ Environment feature                             ┃ Direct ┃ Manager-based ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━┩
-│ Single-agent                                    │  yes   │      yes      │
-│ Multi-agent                                     │  yes   │      no       │
-│ Fundamental/composite spaces (apart from 'Box') │  yes   │      no       │
-└─────────────────────────────────────────────────┴────────┴───────────────┘
-? Isaac Lab workflow: Manager-based | single-agent
+   ```bash
+   [INFO] Installing template dependencies...
 
-                                Supported RL libraries
-┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┓
-┃ RL/training feature          ┃ rl_games ┃ rsl_rl  ┃ skrl                  ┃ sb3     ┃
-┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━┩
-│ ML frameworks                │ PyTorch  │ PyTorch │ PyTorch, JAX          │ PyTorch │
-│ Relative performance         │ ~1X      │ ~1X     │ ~1X                   │ ~0.03X  │
-│ Algorithms                   │ PPO      │ PPO     │ AMP, IPPO, MAPPO, PPO │ PPO     │
-│ Multi-agent support          │ no       │ no      │ yes                   │ no      │
-│ Distributed training         │ yes      │ no      │ yes                   │ no      │
-│ Vectorized training          │ yes      │ yes     │ yes                   │ no      │
-│ Fundamental/composite spaces │ no       │ no      │ yes                   │ no      │
-└──────────────────────────────┴──────────┴─────────┴───────────────────────┴─────────┘
-? RL library: rsl_rl
+   [INFO] Running template generator...
 
-Validating specification...
-Generating external project...
-  |-- Copying repo files...
-  |-- Copying scripts...
-  |-- Copying extension files...
-  |-- Generating tasks...
-  |    |-- Generating 'Template-Template-Isaac-Lab-v0' task...
-  |-- Copying vscode files...
-Setting up git repo in /home/yuma/template_isaac_lab path...
-  |  Initialized empty Git repository in /home/yuma/template_isaac_lab/.git/
+   ? Task type: External
+   ? Project path: /home/yuma/
+   ? Project name: template_isaac_lab
 
---------------------------------------------------------------------------------
-Project 'template_isaac_lab' generated successfully in /home/yuma/template_isaac_lab path.
-See /home/yuma/template_isaac_lab/README.md to get started!
---------------------------------------------------------------------------------
-```
+         RL environment features support according to Isaac Lab workflows
+   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━┓
+   ┃ Environment feature                             ┃ Direct ┃ Manager-based ┃
+   ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━┩
+   │ Single-agent                                    │  yes   │      yes      │
+   │ Multi-agent                                     │  yes   │      no       │
+   │ Fundamental/composite spaces (apart from 'Box') │  yes   │      no       │
+   └─────────────────────────────────────────────────┴────────┴───────────────┘
+   ? Isaac Lab workflow: Manager-based | single-agent
+
+                                   Supported RL libraries
+   ┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━┳━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━┓
+   ┃ RL/training feature          ┃ rl_games ┃ rsl_rl  ┃ skrl                  ┃ sb3     ┃
+   ┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━╇━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━┩
+   │ ML frameworks                │ PyTorch  │ PyTorch │ PyTorch, JAX          │ PyTorch │
+   │ Relative performance         │ ~1X      │ ~1X     │ ~1X                   │ ~0.03X  │
+   │ Algorithms                   │ PPO      │ PPO     │ AMP, IPPO, MAPPO, PPO │ PPO     │
+   │ Multi-agent support          │ no       │ no      │ yes                   │ no      │
+   │ Distributed training         │ yes      │ no      │ yes                   │ no      │
+   │ Vectorized training          │ yes      │ yes     │ yes                   │ no      │
+   │ Fundamental/composite spaces │ no       │ no      │ yes                   │ no      │
+   └──────────────────────────────┴──────────┴─────────┴───────────────────────┴─────────┘
+   ? RL library: rsl_rl
+
+   Validating specification...
+   Generating external project...
+     |-- Copying repo files...
+     |-- Copying scripts...
+     |-- Copying extension files...
+     |-- Generating tasks...
+     |    |-- Generating 'Template-Template-Isaac-Lab-v0' task...
+     |-- Copying vscode files...
+   Setting up git repo in /home/yuma/template_isaac_lab path...
+     |  Initialized empty Git repository in /home/yuma/template_isaac_lab/.git/
+
+   --------------------------------------------------------------------------------
+   Project 'template_isaac_lab' generated successfully in /home/yuma/template_isaac_lab path.
+   See /home/yuma/template_isaac_lab/README.md to get started!
+   --------------------------------------------------------------------------------
+   ```
 
 ## 実行手順
 
